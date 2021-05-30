@@ -52,7 +52,8 @@
             var TotalPoints = 0;
             var ChallengesCompleted = 0;
             var SkipsUsed = 0;
-
+            var SkipsLeft = 3;
+            
             // random element from array
             getRandomElementFromArray = function (list) {
                 return list[Math.floor((Math.random()*list.length))];
@@ -73,7 +74,7 @@
 
                 TotalPoints = TotalPoints + CurrentPointsWorth
                 PointsElement.innerHTML = "Points: " + TotalPoints.toString(10)
-
+                ChallengesCompleted++;
                 CurrentPointsWorth = ChallengeArray[1]
             }
 
@@ -83,17 +84,23 @@
                 SkipsElement.innerHTML = "Skips: 3"
                 ChallengeElement.innerHTML = "Current challenge:"
                 CButton.innerHTML = "Generate a new challenge!"
-                alert("FINAL STATS:\n Points: " + TotalPoints.toString(10) + "\n Total challenges completed: " + ChallengesCompleted.toString(10) + "\n Skips used: " + SkipsUsed.toString(10) + "\n Good job!")
+                alert("FINAL STATS:\n Points:" + TotalPoints.toString(10) + "\n Total challenges completed: " + ChallengesCompleted.toString(10) + "\n Skips used: " + SkipsUsed.toString(10) + "\n Good job!")
+                SkipsUsed = 0;
+                TotalPoints = 0;
+                CurrentPointsWorth = 0;
+                ChallengesCompleted = 0;
             }
 
             SkipButton.onclick = function(){
                 if(SkipsUsed < 3 ){
                     SkipsUsed++;
+                    SkipsLeft = SkipsLeft - 1;
 
                     var ChallengeArray = getRandomElementFromArray(Challenges);
                     ChallengeElement.innerHTML = "Current challenge: " + ChallengeArray[0];
                     PointsElement.innerHTML = "Points: " + TotalPoints.toString(10)
                     CurrentPointsWorth = ChallengeArray[1]
+                    SkipsElement.innerHTML = "Skips left: " + SkipsLeft.toString(10)
                 } else {
                     alert("You have no skips left!")
                     DoneButton.onclick()
