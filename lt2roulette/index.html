@@ -84,7 +84,10 @@
                 SkipsElement.innerHTML = "Skips: 3"
                 ChallengeElement.innerHTML = "Current challenge:"
                 CButton.innerHTML = "Generate a new challenge!"
-                ChallengesCompleted = ChallengesCompleted - 1;
+
+                if (ChallengesCompleted != 0) {
+                    ChallengesCompleted = ChallengesCompleted - 1;
+                }
                 alert("FINAL STATS:\n Points: " + TotalPoints.toString(10) + "\n Total challenges completed: " + ChallengesCompleted.toString(10) + "\n Skips used: " + SkipsUsed.toString(10) + "\n Good job!")
                 SkipsUsed = 0;
                 TotalPoints = 0;
