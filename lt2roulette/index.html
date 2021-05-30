@@ -18,7 +18,7 @@
             <div id="skips">Skips: 3 </div> </br>
             <div id= "cchallenge">Current challenge:</div> </br>
             <button id="genbutton">Generate a new challenge!</button>
-            <button id="donebutton">Done!</button>
+            <button id="donebutton">Finish!</button>
             <button id="skipbutton">Skip!</button> 
         </p>
     </body>
@@ -48,10 +48,10 @@
                 ["Get cavecrawler", 50],
                 ["Get phantom", 100]
             ];
-            var Challenge = "Get oak";
-            var PointsWorth = 1;
+            var CurrentPointsWorth = 0
             var TotalPoints = 0;
             var ChallengesCompleted = 0;
+            var SkipsUsed = 0;
 
             // random element from array
             getRandomElementFromArray = function (list) {
@@ -59,10 +59,45 @@
             }
 
             // Listen for button clicks
-            CButton.onclick = function(){
+            CButton.onclick = function() {
+                if (CButton.innerHTML == "Generate a new challenge!"){
+                    CButton.innerText = "Generate another challenge!"
+                }
+
                 var ChallengeArray = getRandomElementFromArray(Challenges);
+
                 console.log(ChallengeArray[0]);
                 console.log(ChallengeArray[1]);
+
+                ChallengeElement.innerHTML = "Current challenge: " + ChallengeArray[0];
+
+                TotalPoints = TotalPoints + CurrentPointsWorth
+                PointsElement.innerHTML = "Points: " + TotalPoints.toString(10)
+
+                CurrentPointsWorth = ChallengeArray[1]
+            }
+
+            DoneButton.onclick = function() {
+                // reset everything to defaults
+                PointsElement.innerHTML = "Points: 0"
+                SkipsElement.innerHTML = "Skips: 3"
+                ChallengeElement.innerHTML = "Current challenge:"
+                CButton.innerHTML = "Generate a new challenge!"
+                alert("FINAL STATS:\n Points:" + TotalPoints.toString(10) + "\n Total challenges completed: " + ChallengesCompleted.toString(10) + "\n Skips used: " + SkipsUsed.toString(10) + "\n Good job!")
+            }
+
+            SkipButton.onclick = function(){
+                if(SkipsUsed < 3 ){
+                    SkipsUsed++;
+
+                    var ChallengeArray = getRandomElementFromArray(Challenges);
+                    ChallengeElement.innerHTML = "Current challenge: " + ChallengeArray[0];
+                    PointsElement.innerHTML = "Points: " + TotalPoints.toString(10)
+                    CurrentPointsWorth = ChallengeArray[1]
+                } else {
+                    alert("You have no skips left!")
+                    DoneButton.onclick()
+                }
             }
         </script>
     </footer>
