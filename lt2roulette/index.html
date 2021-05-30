@@ -53,7 +53,7 @@
             var ChallengesCompleted = 0;
             var SkipsUsed = 0;
             var SkipsLeft = 3;
-            
+
             // random element from array
             getRandomElementFromArray = function (list) {
                 return list[Math.floor((Math.random()*list.length))];
@@ -84,7 +84,8 @@
                 SkipsElement.innerHTML = "Skips: 3"
                 ChallengeElement.innerHTML = "Current challenge:"
                 CButton.innerHTML = "Generate a new challenge!"
-                alert("FINAL STATS:\n Points:" + TotalPoints.toString(10) + "\n Total challenges completed: " + ChallengesCompleted.toString(10) + "\n Skips used: " + SkipsUsed.toString(10) + "\n Good job!")
+                ChallengesCompleted = ChallengesCompleted - 1;
+                alert("FINAL STATS:\n Points: " + TotalPoints.toString(10) + "\n Total challenges completed: " + ChallengesCompleted.toString(10) + "\n Skips used: " + SkipsUsed.toString(10) + "\n Good job!")
                 SkipsUsed = 0;
                 TotalPoints = 0;
                 CurrentPointsWorth = 0;
